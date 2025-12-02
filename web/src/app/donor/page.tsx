@@ -7,13 +7,13 @@ const MOCK_FUNDS = [
   {
     id: "KU",
     name: "University of Kansas",
-    health: "Strong",
+    // health: "Strong",
     description: "General student emergency support for KU undergrads.",
   },
   {
     id: "KSU",
     name: "Kansas State University",
-    health: "Medium",
+    // health: "Medium",
     description: "Supports housing and food insecurity emergencies.",
   },
 ];
@@ -61,9 +61,9 @@ export default function DonorPage() {
                   <span className="font-medium text-slate-100">
                     {fund.name}
                   </span>
-                  <span className="text-xs text-slate-400">
+                  {/* <span className="text-xs text-slate-400">
                     {fund.health} fund
-                  </span>
+                  </span> */}
                 </div>
                 <p className="mt-1 text-xs text-slate-400">
                   {fund.description}
