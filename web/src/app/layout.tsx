@@ -11,13 +11,13 @@ export const metadata: Metadata = {
   other: {
     "fc:miniapp": JSON.stringify({
       version: "next",
-      imageUrl: "https://campusshield.app/og.png",
+      imageUrl: "https://mbc-2025.vercel.app/og.png",
       button: {
         title: "Open App",
         action: {
           type: "launch_miniapp",
           name: "CampusShield",
-          url: "https://campusshield.app",
+          url: "https://mbc-2025.vercel.app",
         },
       },
     }),

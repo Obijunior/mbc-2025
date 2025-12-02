@@ -18,7 +18,7 @@ if (!projectId) {
 const metadata = {
   name: 'CampusShield',
   description: 'CampusShield - Blockchain-based Campus Management',
-  url: 'https://campusshield.app',
+  url: 'https://mbc-2025.vercel.app',
   icons: ['https://avatars.githubusercontent.com/u/179229932']
 }
 

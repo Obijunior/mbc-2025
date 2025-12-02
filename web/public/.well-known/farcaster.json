@@ -1,15 +1,15 @@
 {
-  "accountAssociation": {
-    "header": "",
-    "payload": "",
-    "signature": ""
+"accountAssociation": {
+    "header": "eyJmaWQiOjE1NTIzNzgsInR5cGUiOiJjdXN0b2R5Iiwia2V5IjoiMHhmN0Y4NkY3MDI3Njc2ZkRCYjVDZTI4MThBQmVkOEQxRTQ0MGI4OURGIn0",
+    "payload": "eyJkb21haW4iOiJtYmMtMjAyNS52ZXJjZWwuYXBwIn0",
+    "signature": "YiHEKsx28rq9P5hsxjgmDhbzttRirRdqbkHmp7AtSBBWKVIxny/h5P+wPDHTvBN8EnzHq0OmouP0BeGv8rqGXBw="
   },
   "miniapp": {
     "version": "1",
     "name": "CampusShield",
-    "homeUrl": "https://campusshield.app",
-    "iconUrl": "https://campusshield.app/icon.png",
-    "splashImageUrl": "https://campusshield.app/splash.png",
+    "homeUrl": "https://mbc-2025.vercel.app/",
+    "iconUrl": "https://mbc-2025.vercel.app/icon.png",
+    "splashImageUrl": "https://mbc-2025.vercel.app/splash.png",
     "splashBackgroundColor": "#0f172a",
     "description": "Emergency aid distribution for universities",
     "primaryCategory": "social",
@@ -17,6 +17,6 @@
     "tagline": "Emergency aid for students",
     "ogTitle": "CampusShield",
     "ogDescription": "Emergency aid distribution for universities",
-    "ogImageUrl": "https://campusshield.app/og.png"
+    "ogImageUrl": "https://mbc-2025.vercel.app/og.png"
   }
 }
