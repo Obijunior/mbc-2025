@@ -18,5 +18,8 @@
     "ogTitle": "CampusShield",
     "ogDescription": "Emergency aid distribution for universities",
     "ogImageUrl": "https://mbc-2025.vercel.app/og.png"
+  },
+  "baseBuilder": {
+    "ownerAddress": "0x3A2d63c82075Ec3aCc6f2feb84ef9a53Fd954e34"
   }
 }
