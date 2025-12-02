@@ -1,0 +1,22 @@
+{
+  "accountAssociation": {
+    "header": "",
+    "payload": "",
+    "signature": ""
+  },
+  "miniapp": {
+    "version": "1",
+    "name": "CampusShield",
+    "homeUrl": "https://campusshield.app",
+    "iconUrl": "https://campusshield.app/icon.png",
+    "splashImageUrl": "https://campusshield.app/splash.png",
+    "splashBackgroundColor": "#0f172a",
+    "description": "Emergency aid distribution for universities",
+    "primaryCategory": "social",
+    "tags": ["education", "charity", "base"],
+    "tagline": "Emergency aid for students",
+    "ogTitle": "CampusShield",
+    "ogDescription": "Emergency aid distribution for universities",
+    "ogImageUrl": "https://campusshield.app/og.png"
+  }
+}
