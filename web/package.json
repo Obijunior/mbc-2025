@@ -10,7 +10,11 @@
   },
   "dependencies": {
     "@rainbow-me/rainbowkit": "^2.2.9",
+    "@reown/appkit": "^1.8.14",
+    "@reown/appkit-adapter-solana": "^1.8.14",
+    "@reown/appkit-adapter-wagmi": "^1.8.14",
     "@tanstack/react-query": "^5.90.11",
+    "@wagmi/core": "^3.0.0",
     "clsx": "^2.1.1",
     "next": "16.0.6",
     "react": "19.2.0",

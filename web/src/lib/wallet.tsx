@@ -1,32 +1,45 @@
-"use client";
+'use client'
 
-import "@rainbow-me/rainbowkit/styles.css";
-import {
-  RainbowKitProvider,
-  getDefaultConfig,
-} from "@rainbow-me/rainbowkit";
-import { WagmiProvider } from "wagmi";
-import { baseSepolia } from "wagmi/chains";
-import {
-  QueryClient,
-  QueryClientProvider,
-} from "@tanstack/react-query";
+import { wagmiAdapter, projectId } from '@/config'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { createAppKit } from '@reown/appkit/react'
+import { baseSepolia } from '@reown/appkit/networks'
+import React, { type ReactNode } from 'react'
+import { cookieToInitialState, WagmiProvider, type Config } from 'wagmi'
 
-const queryClient = new QueryClient();
+// Set up queryClient
+const queryClient = new QueryClient()
 
-const config = getDefaultConfig({
-  appName: "CampusShield",
-  projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || "",
-  chains: [baseSepolia],
-  ssr: true,
-});
+if (!projectId) {
+  throw new Error('Project ID is not defined')
+}
 
-export function WalletProvider({ children }: { children: React.ReactNode }) {
+// Set up metadata
+const metadata = {
+  name: 'CampusShield',
+  description: 'CampusShield - Blockchain-based Campus Management',
+  url: 'https://campusshield.app',
+  icons: ['https://avatars.githubusercontent.com/u/179229932']
+}
+
+// Create the modal
+createAppKit({
+  adapters: [wagmiAdapter],
+  projectId,
+  networks: [baseSepolia],
+  defaultNetwork: baseSepolia,
+  metadata: metadata,
+  features: {
+    analytics: true
+  }
+})
+
+export function WalletProvider({ children, cookies }: { children: ReactNode; cookies: string | null }) {
+  const initialState = cookieToInitialState(wagmiAdapter.wagmiConfig as Config, cookies)
+
   return (
-    <WagmiProvider config={config}>
-      <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider>{children}</RainbowKitProvider>
-      </QueryClientProvider>
+    <WagmiProvider config={wagmiAdapter.wagmiConfig as Config} initialState={initialState}>
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </WagmiProvider>
-  );
+  )
 }

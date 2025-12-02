@@ -2,7 +2,6 @@
 "use client";
 
 import Link from "next/link";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 
@@ -45,7 +44,7 @@ export function Navbar() {
               </Link>
             ))}
           </div>
-          <ConnectButton />
+          <appkit-button />
         </nav>
       </div>
     </header>
