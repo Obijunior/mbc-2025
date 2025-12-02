@@ -3,10 +3,25 @@ import type { Metadata } from "next";
 import { WalletProvider } from "@/lib/wallet";
 import { Navbar } from "@/components/navbar";
 import { headers } from 'next/headers';
+import MiniAppInit from "@/components/MiniAppInit";
 
 export const metadata: Metadata = {
   title: "CampusShield",
   description: "Onchain emergency fund for universities on Base",
+  other: {
+    "fc:miniapp": JSON.stringify({
+      version: "next",
+      imageUrl: "https://campusshield.app/og.png",
+      button: {
+        title: "Open App",
+        action: {
+          type: "launch_miniapp",
+          name: "CampusShield",
+          url: "https://campusshield.app",
+        },
+      },
+    }),
+  },
 };
 
 export default async function RootLayout({
@@ -20,6 +35,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen bg-slate-950 text-slate-100">
+        <MiniAppInit />
         <WalletProvider cookies={cookies}>
           <div className="flex min-h-screen flex-col">
             <Navbar />
