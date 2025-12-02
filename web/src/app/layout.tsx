@@ -23,7 +23,7 @@ export default async function RootLayout({
         <WalletProvider cookies={cookies}>
           <div className="flex min-h-screen flex-col">
             <Navbar />
-            <main className="flex-1 px-4 py-6 sm:px-8 lg:px-16">
+            <main className="flex-1">
               {children}
             </main>
             <footer className="border-t border-slate-800 px-4 py-4 text-xs text-slate-400 sm:px-8 lg:px-16">
