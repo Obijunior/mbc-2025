@@ -18,12 +18,12 @@ export function Navbar() {
   return (
     <header className="relative border-b border-slate-800/50 bg-slate-950/80 backdrop-blur-xl">
       {/* Subtle gradient glow */}
-      <div className="absolute inset-0 bg-gradient-to-r from-sky-500/5 via-transparent to-red-500/5 pointer-events-none" />
+      <div className="absolute inset-0 bg-linear-to-r from-sky-500/5 via-transparent to-red-500/5 pointer-events-none" />
       
       <div className="relative mx-auto flex max-w-7xl items-center justify-between px-6 py-4 sm:px-8 lg:px-12">
         {/* Logo */}
         <Link href="/" className="group flex items-center gap-3">
-          <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-sky-500/20 to-red-500/20 border border-sky-500/30 transition-all duration-300 group-hover:scale-110 group-hover:border-sky-400/50 group-hover:shadow-lg group-hover:shadow-sky-500/30">
+          <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-sky-500/20 to-red-500/20 border border-sky-500/30 transition-all duration-300 group-hover:scale-110 group-hover:border-sky-400/50 group-hover:shadow-lg group-hover:shadow-sky-500/30">
             <span className="text-base font-black text-sky-300 group-hover:text-sky-200 transition-colors">
               CS
             </span>
@@ -52,7 +52,7 @@ export function Navbar() {
                 >
                   {/* Active indicator background */}
                   {isActive && (
-                    <span className="absolute inset-0 rounded-xl bg-gradient-to-r from-sky-500/20 to-red-500/20 border border-sky-500/30" />
+                    <span className="absolute inset-0 rounded-xl bg-linear-to-r from-sky-500/20 to-red-500/20 border border-sky-500/30" />
                   )}
                   
                   {/* Hover background */}
@@ -77,7 +77,7 @@ export function Navbar() {
 
           {/* Wallet Button */}
           <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-sky-500/20 to-red-500/20 blur-xl opacity-0 hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+            <div className="absolute inset-0 bg-linear-to-r from-sky-500/20 to-red-500/20 blur-xl opacity-0 hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
             <appkit-button />
           </div>
         </nav>
