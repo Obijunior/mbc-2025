@@ -7,11 +7,13 @@ export const USDC_ADDRESSES = {
   base: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913' as Address,
 } as const;
 
-// CampusShield contract addresses
-// TODO: Update after deployment
+// CampusShield contract addresses from environment variables
+const baseSepoliaAddress = process.env.NEXT_PUBLIC_CAMPUS_SHIELD_ADDRESS_BASE_SEPOLIA as Address;
+const baseAddress = process.env.NEXT_PUBLIC_CAMPUS_SHIELD_ADDRESS_BASE as Address;
+
 export const CAMPUS_SHIELD_ADDRESSES = {
-  baseSepolia: '0x0000000000000000000000000000000000000000' as Address, // Replace after deployment
-  base: '0x0000000000000000000000000000000000000000' as Address, // Replace after mainnet deployment
+  baseSepolia: baseSepoliaAddress,
+  base: baseAddress,
 } as const;
 
 // Current network (Base Sepolia for testnet)

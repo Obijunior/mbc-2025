@@ -37,6 +37,7 @@ export default function DonorPage() {
   const [selectedFund, setSelectedFund] = useState(1n);
   const [amount, setAmount] = useState("");
   const [txStep, setTxStep] = useState<'idle' | 'approving' | 'donating' | 'success' | 'error'>('idle');
+  const [showPurchaseModal, setShowPurchaseModal] = useState(false);
   
   // Contract hooks
   const { data: usdcBalance, refetch: refetchBalance } = useUSDCBalance();
@@ -128,12 +129,66 @@ export default function DonorPage() {
                 ${usdcBalance !== undefined ? formatUSDC(usdcBalance) : '0.00'}
               </p>
             </div>
-            <div className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-full bg-sky-500 flex items-center justify-center">
-                <span className="text-xs font-bold text-white">$</span>
+            <div className="flex flex-col items-end gap-3">
+              <div className="flex items-center gap-2">
+                <div className="h-8 w-8 rounded-full bg-sky-500 flex items-center justify-center">
+                  <span className="text-xs font-bold text-white">$</span>
+                </div>
+                <span className="text-sm font-medium text-sky-200">USDC</span>
               </div>
-              <span className="text-sm font-medium text-sky-200">USDC</span>
+              <button
+                onClick={() => setShowPurchaseModal(true)}
+                className="rounded-lg bg-emerald-600 px-3 py-1.5 text-xs font-medium text-white transition hover:bg-emerald-500"
+              >
+                Purchase USDC
+              </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Purchase USDC Modal */}
+      {showPurchaseModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+          <div className="w-full max-w-md rounded-2xl border border-slate-700 bg-slate-900 p-6 shadow-lg">
+            <h3 className="text-lg font-semibold text-white mb-2">Purchase USDC</h3>
+            <p className="text-sm text-slate-400 mb-4">
+              Use an exchange or payment service to purchase USDC and transfer it to your wallet.
+            </p>
+            
+            <div className="space-y-3 mb-6">
+              <a
+                href="https://www.circle.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block rounded-lg border border-slate-700 bg-slate-800 px-4 py-3 text-sm font-medium text-sky-300 transition hover:border-sky-500/50 hover:bg-slate-750"
+              >
+                Circle
+              </a>
+              <a
+                href="https://www.coinbase.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block rounded-lg border border-slate-700 bg-slate-800 px-4 py-3 text-sm font-medium text-sky-300 transition hover:border-sky-500/50 hover:bg-slate-750"
+              >
+                Coinbase
+              </a>
+              <a
+                href="https://www.kraken.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block rounded-lg border border-slate-700 bg-slate-800 px-4 py-3 text-sm font-medium text-sky-300 transition hover:border-sky-500/50 hover:bg-slate-750"
+              >
+                Kraken
+              </a>
+            </div>
+
+            <button
+              onClick={() => setShowPurchaseModal(false)}
+              className="w-full rounded-lg bg-slate-700 px-4 py-2 text-sm font-medium text-white transition hover:bg-slate-600"
+            >
+              Close
+            </button>
           </div>
         </div>
       )}
