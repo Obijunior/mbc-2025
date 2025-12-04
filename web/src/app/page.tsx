@@ -2,13 +2,22 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useGetStats, useGetUniversity } from '@/hooks/useContract';
 
 export default function Home() {
   const [isVisible, setIsVisible] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
-  const [fundAmount] = useState(24300);
-  const [disbursed] = useState(7620);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  // Fetch real stats from contract
+  const { data: stats } = useGetStats();
+  const { data: universityData } = useGetUniversity(1n);
+
+  // Use real data or fallback to demo values
+  const fundAmount = stats ? Number(stats[2]) / 1e6 : 24300;
+  const disbursed = stats ? Number(stats[3]) / 1e6 : 7620;
+  const totalDonors = universityData ? Number(universityData[4]) : 118;
+  const studentsHelped = stats ? Number(stats[1]) : 63;
 
   useEffect(() => {
     // Delay state updates to avoid synchronous render warnings and ensure smooth animation
@@ -124,7 +133,7 @@ export default function Home() {
                         ${fundAmount.toLocaleString()}
                       </div>
                       <div className="text-sm text-sky-300/80 font-medium">
-                        118 active donors
+                        {totalDonors} active donors
                       </div>
                     </div>
                   </div>
@@ -147,7 +156,7 @@ export default function Home() {
                         ${disbursed.toLocaleString()}
                       </div>
                       <div className="text-sm text-red-300/80 font-medium">
-                        63 students helped
+                        {studentsHelped} students helped
                       </div>
                     </div>
                   </div>

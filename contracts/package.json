@@ -3,12 +3,17 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "deploy:local": "hardhat ignition deploy ./ignition/modules/CampusShield.js --network hardhat",
+    "deploy:sepolia": "hardhat ignition deploy ./ignition/modules/CampusShield.js --network baseSepolia",
+    "deploy:mainnet": "hardhat ignition deploy ./ignition/modules/CampusShield.js --network base",
+    "verify": "hardhat verify --network baseSepolia"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "CampusShield - USDC-powered emergency fund smart contracts for Base",
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^5.0.0",
     "dotenv": "^17.2.3",

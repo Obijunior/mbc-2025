@@ -1,39 +1,116 @@
 // web/app/donor/page.tsx
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useAccount } from "wagmi";
+import { 
+  useUSDCBalance, 
+  useUSDCAllowance, 
+  useApproveUSDC, 
+  useDonate,
+  useGetUniversity,
+} from "@/hooks/useContract";
+import { 
+  formatUSDC, 
+  parseUSDC, 
+  CAMPUS_SHIELD_ADDRESS,
+  USDC_ADDRESS 
+} from "@/lib/contracts";
 
-const MOCK_FUNDS = [
+// For demo purposes, we'll use university ID 1
+// In production, this would be fetched dynamically
+const DEMO_UNIVERSITIES = [
   {
-    id: "KU",
+    id: 1n,
     name: "University of Kansas",
-    // health: "Strong",
     description: "General student emergency support for KU undergrads.",
   },
   {
-    id: "KSU",
+    id: 2n,
     name: "Kansas State University",
-    // health: "Medium",
     description: "Supports housing and food insecurity emergencies.",
   },
 ];
 
 export default function DonorPage() {
-  const [selectedFund, setSelectedFund] = useState(MOCK_FUNDS[0].id);
+  const { isConnected } = useAccount();
+  const [selectedFund, setSelectedFund] = useState(1n);
   const [amount, setAmount] = useState("");
+  const [txStep, setTxStep] = useState<'idle' | 'approving' | 'donating' | 'success' | 'error'>('idle');
+  
+  // Contract hooks
+  const { data: usdcBalance, refetch: refetchBalance } = useUSDCBalance();
+  const { data: allowance, refetch: refetchAllowance } = useUSDCAllowance();
+  const { data: universityData } = useGetUniversity(selectedFund);
+  
+  const { 
+    approve, 
+    isPending: isApproving, 
+    isSuccess: approvalSuccess, 
+    error: approvalError 
+  } = useApproveUSDC();
+  
+  const { 
+    donate, 
+    isPending: isDonating, 
+    isSuccess: donationSuccess, 
+    error: donationError 
+  } = useDonate();
 
-  const currentFund = MOCK_FUNDS.find((f) => f.id === selectedFund)!;
+  const currentFund = DEMO_UNIVERSITIES.find((f) => f.id === selectedFund)!;
+  const amountInUnits = amount ? parseUSDC(amount) : 0n;
+  const needsApproval = allowance !== undefined && amountInUnits > allowance;
+
+  // Handle approval success -> proceed to donate
+  useEffect(() => {
+    if (approvalSuccess && txStep === 'approving') {
+      refetchAllowance();
+      setTxStep('donating');
+      donate(selectedFund, amountInUnits);
+    }
+  }, [approvalSuccess, txStep, refetchAllowance, donate, selectedFund, amountInUnits]);
+
+  // Handle donation success
+  useEffect(() => {
+    if (donationSuccess && txStep === 'donating') {
+      setTxStep('success');
+      refetchBalance();
+      refetchAllowance();
+    }
+  }, [donationSuccess, txStep, refetchBalance, refetchAllowance]);
+
+  // Handle errors
+  useEffect(() => {
+    if (approvalError || donationError) {
+      setTxStep('error');
+    }
+  }, [approvalError, donationError]);
 
   const handleDonateClick = () => {
-    // later: call contract donate()
-    console.log("Donate", amount, "to", selectedFund);
+    if (!amount || amountInUnits === 0n) return;
+
+    if (needsApproval) {
+      setTxStep('approving');
+      approve(amountInUnits);
+    } else {
+      setTxStep('donating');
+      donate(selectedFund, amountInUnits);
+    }
   };
 
+  const resetTransaction = () => {
+    setTxStep('idle');
+    setAmount("");
+  };
+
+  const isProcessing = isApproving || isDonating;
+  const hasEnoughBalance = usdcBalance !== undefined && amountInUnits <= usdcBalance;
+
   return (
-    <div className="mx-auto flex max-w-4xl flex-col gap-6 py-8">
+    <div className="mx-auto flex max-w-4xl flex-col gap-6 px-4 py-8 sm:px-6">
       <header className="space-y-2">
         <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-          Donor dashboard
+          Donor Dashboard
         </h1>
         <p className="max-w-2xl text-sm text-slate-300 sm:text-base">
           Choose a university emergency fund on Base, see its overall health,
@@ -41,15 +118,36 @@ export default function DonorPage() {
         </p>
       </header>
 
+      {/* USDC Balance Display */}
+      {isConnected && (
+        <div className="rounded-xl border border-sky-500/30 bg-sky-500/10 p-4">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-xs font-medium text-sky-300">Your USDC Balance</p>
+              <p className="text-2xl font-bold text-white">
+                ${usdcBalance !== undefined ? formatUSDC(usdcBalance) : '0.00'}
+              </p>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="h-8 w-8 rounded-full bg-sky-500 flex items-center justify-center">
+                <span className="text-xs font-bold text-white">$</span>
+              </div>
+              <span className="text-sm font-medium text-sky-200">USDC</span>
+            </div>
+          </div>
+        </div>
+      )}
+
       <section className="grid gap-6 md:grid-cols-[2fr,3fr]">
+        {/* Fund Selection */}
         <div className="space-y-4 rounded-2xl border border-slate-800 bg-slate-900/60 p-4">
           <h2 className="text-sm font-semibold text-slate-100">
             1. Select a university fund
           </h2>
           <div className="space-y-3 text-sm">
-            {MOCK_FUNDS.map((fund) => (
+            {DEMO_UNIVERSITIES.map((fund) => (
               <button
-                key={fund.id}
+                key={fund.id.toString()}
                 onClick={() => setSelectedFund(fund.id)}
                 className={`w-full rounded-xl border px-3 py-3 text-left transition ${
                   selectedFund === fund.id
@@ -61,51 +159,136 @@ export default function DonorPage() {
                   <span className="font-medium text-slate-100">
                     {fund.name}
                   </span>
-                  {/* <span className="text-xs text-slate-400">
-                    {fund.health} fund
-                  </span> */}
                 </div>
                 <p className="mt-1 text-xs text-slate-400">
                   {fund.description}
                 </p>
+                {universityData && selectedFund === fund.id && (
+                  <div className="mt-2 pt-2 border-t border-slate-800">
+                    <p className="text-xs text-emerald-400">
+                      Pool Balance: ${formatUSDC(universityData[2])} USDC
+                    </p>
+                  </div>
+                )}
               </button>
             ))}
           </div>
         </div>
 
+        {/* Donation Form */}
         <div className="space-y-4 rounded-2xl border border-slate-800 bg-slate-900/60 p-4">
           <h2 className="text-sm font-semibold text-slate-100">
             2. Donate USDC
           </h2>
-          <p className="text-xs text-slate-400">
-            Once connected, you’ll approve and send USDC from your wallet
-            directly into the {currentFund.name} emergency fund.
-          </p>
+          
+          {!isConnected ? (
+            <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-4">
+              <p className="text-sm text-amber-200">
+                Please connect your wallet to donate.
+              </p>
+            </div>
+          ) : txStep === 'success' ? (
+            <div className="space-y-4">
+              <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-4">
+                <p className="text-sm text-emerald-200 font-medium">
+                  🎉 Donation successful!
+                </p>
+                <p className="text-xs text-emerald-300 mt-1">
+                  Thank you for supporting students in need.
+                </p>
+              </div>
+              <button
+                onClick={resetTransaction}
+                className="w-full rounded-xl bg-slate-700 px-3 py-2 text-sm font-medium text-white transition hover:bg-slate-600"
+              >
+                Make Another Donation
+              </button>
+            </div>
+          ) : txStep === 'error' ? (
+            <div className="space-y-4">
+              <div className="rounded-xl border border-red-500/30 bg-red-500/10 p-4">
+                <p className="text-sm text-red-200 font-medium">
+                  Transaction failed
+                </p>
+                <p className="text-xs text-red-300 mt-1">
+                  {(approvalError || donationError)?.message || 'Unknown error'}
+                </p>
+              </div>
+              <button
+                onClick={resetTransaction}
+                className="w-full rounded-xl bg-slate-700 px-3 py-2 text-sm font-medium text-white transition hover:bg-slate-600"
+              >
+                Try Again
+              </button>
+            </div>
+          ) : (
+            <>
+              <p className="text-xs text-slate-400">
+                Donate USDC from your wallet directly into the {currentFund.name} emergency fund.
+              </p>
 
-          <div className="space-y-2 text-sm">
-            <label className="text-xs font-medium text-slate-300">
-              Amount (USDC)
-            </label>
-            <input
-              type="number"
-              min="0"
-              step="0.01"
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-              placeholder="e.g., 50.00"
-              className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 outline-none ring-sky-500/40 focus:border-sky-500 focus:ring-2"
-            />
-          </div>
+              <div className="space-y-2 text-sm">
+                <label className="text-xs font-medium text-slate-300">
+                  Amount (USDC)
+                </label>
+                <input
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                  placeholder="e.g., 50.00"
+                  disabled={isProcessing}
+                  className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 outline-none ring-sky-500/40 focus:border-sky-500 focus:ring-2 disabled:opacity-60"
+                />
+                {amount && !hasEnoughBalance && (
+                  <p className="text-xs text-red-400">Insufficient USDC balance</p>
+                )}
+              </div>
 
-          <button
-            onClick={handleDonateClick}
-            className="mt-2 inline-flex w-full items-center justify-center rounded-xl bg-sky-500 px-3 py-2 text-sm font-medium text-slate-950 transition hover:bg-sky-400 disabled:cursor-not-allowed disabled:opacity-60"
-            disabled={!amount}
-          >
-            Donate to {currentFund.name}
-          </button>
+              {/* Transaction Status */}
+              {txStep !== 'idle' && (
+                <div className="rounded-xl border border-sky-500/30 bg-sky-500/10 p-3">
+                  <div className="flex items-center gap-2">
+                    <div className="h-4 w-4 animate-spin rounded-full border-2 border-sky-400 border-t-transparent" />
+                    <p className="text-sm text-sky-200">
+                      {txStep === 'approving' && 'Approving USDC...'}
+                      {txStep === 'donating' && 'Processing donation...'}
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              <button
+                onClick={handleDonateClick}
+                className="mt-2 inline-flex w-full items-center justify-center rounded-xl bg-sky-500 px-3 py-2 text-sm font-medium text-slate-950 transition hover:bg-sky-400 disabled:cursor-not-allowed disabled:opacity-60"
+                disabled={!amount || isProcessing || !hasEnoughBalance}
+              >
+                {isProcessing ? (
+                  'Processing...'
+                ) : needsApproval ? (
+                  `Approve & Donate to ${currentFund.name}`
+                ) : (
+                  `Donate to ${currentFund.name}`
+                )}
+              </button>
+
+              <p className="text-xs text-slate-500 text-center">
+                {needsApproval 
+                  ? 'First approval, then donation (2 transactions)' 
+                  : 'Single transaction required'}
+              </p>
+            </>
+          )}
         </div>
       </section>
+
+      {/* Contract Info */}
+      <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-4 text-xs text-slate-500">
+        <p>Contract: <code className="text-slate-400">{CAMPUS_SHIELD_ADDRESS}</code></p>
+        <p>USDC: <code className="text-slate-400">{USDC_ADDRESS}</code></p>
+        <p className="mt-1 text-slate-600">Deployed on Base Sepolia</p>
+      </div>
     </div>
   );
 }
