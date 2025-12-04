@@ -3,18 +3,18 @@
 
 import { useState, useEffect } from "react";
 import { useAccount } from "wagmi";
-import { 
-  useUSDCBalance, 
-  useUSDCAllowance, 
-  useApproveUSDC, 
+import {
+  useUSDCBalance,
+  useUSDCAllowance,
+  useApproveUSDC,
   useDonate,
   useGetUniversity,
 } from "@/hooks/useContract";
-import { 
-  formatUSDC, 
-  parseUSDC, 
+import {
+  formatUSDC,
+  parseUSDC,
   CAMPUS_SHIELD_ADDRESS,
-  USDC_ADDRESS 
+  USDC_ADDRESS
 } from "@/lib/contracts";
 
 // For demo purposes, we'll use university ID 1
@@ -37,24 +37,24 @@ export default function DonorPage() {
   const [selectedFund, setSelectedFund] = useState(1n);
   const [amount, setAmount] = useState("");
   const [txStep, setTxStep] = useState<'idle' | 'approving' | 'donating' | 'success' | 'error'>('idle');
-  
+
   // Contract hooks
   const { data: usdcBalance, refetch: refetchBalance } = useUSDCBalance();
-  const { data: allowance, refetch: refetchAllowance } = useUSDCAllowance();
+  const { data: allowance, isLoading: isAllowanceLoading, refetch: refetchAllowance } = useUSDCAllowance();
   const { data: universityData } = useGetUniversity(selectedFund);
-  
-  const { 
-    approve, 
-    isPending: isApproving, 
-    isSuccess: approvalSuccess, 
-    error: approvalError 
+
+  const {
+    approve,
+    isPending: isApproving,
+    isSuccess: approvalSuccess,
+    error: approvalError
   } = useApproveUSDC();
-  
-  const { 
-    donate, 
-    isPending: isDonating, 
-    isSuccess: donationSuccess, 
-    error: donationError 
+
+  const {
+    donate,
+    isPending: isDonating,
+    isSuccess: donationSuccess,
+    error: donationError
   } = useDonate();
 
   const currentFund = DEMO_UNIVERSITIES.find((f) => f.id === selectedFund)!;
@@ -151,11 +151,10 @@ export default function DonorPage() {
               <button
                 key={fund.id.toString()}
                 onClick={() => setSelectedFund(fund.id)}
-                className={`w-full rounded-xl border px-3 py-3 text-left transition ${
-                  selectedFund === fund.id
-                    ? "border-sky-500/80 bg-slate-900"
-                    : "border-slate-800 bg-slate-950/60 hover:border-slate-700"
-                }`}
+                className={`w-full rounded-xl border px-3 py-3 text-left transition ${selectedFund === fund.id
+                  ? "border-sky-500/80 bg-slate-900"
+                  : "border-slate-800 bg-slate-950/60 hover:border-slate-700"
+                  }`}
               >
                 <div className="flex items-center justify-between gap-2">
                   <span className="font-medium text-slate-100">
@@ -182,7 +181,7 @@ export default function DonorPage() {
           <h2 className="text-sm font-semibold text-slate-100">
             2. Donate USDC
           </h2>
-          
+
           {!isConnected ? (
             <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-4">
               <p className="text-sm text-amber-200">
@@ -264,7 +263,7 @@ export default function DonorPage() {
               <button
                 onClick={handleDonateClick}
                 className="mt-2 inline-flex w-full items-center justify-center rounded-xl bg-sky-500 px-3 py-2 text-sm font-medium text-slate-950 transition hover:bg-sky-400 disabled:cursor-not-allowed disabled:opacity-60"
-                disabled={!amount || isProcessing || !hasEnoughBalance}
+                disabled={!amount || isProcessing || !hasEnoughBalance || isAllowanceLoading}
               >
                 {isProcessing ? (
                   'Processing...'
@@ -276,8 +275,8 @@ export default function DonorPage() {
               </button>
 
               <p className="text-xs text-slate-500 text-center">
-                {needsApproval 
-                  ? 'First approval, then donation (2 transactions)' 
+                {needsApproval
+                  ? 'First approval, then donation (2 transactions)'
                   : 'Single transaction required'}
               </p>
             </>
