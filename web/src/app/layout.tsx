@@ -1,7 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { WalletProvider } from "@/lib/wallet";
-import { Navbar } from "@/components/navbar";
+import { Navbar } from "@/components/Navbar";
 import { headers } from 'next/headers';
 import MiniAppInit from "@/components/MiniAppInit";
 
