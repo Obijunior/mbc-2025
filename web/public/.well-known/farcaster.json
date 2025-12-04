@@ -8,7 +8,7 @@
     "version": "1",
     "name": "CampusShield",
     "homeUrl": "https://mbc-2025.vercel.app/",
-    "iconUrl": "https://mbc-2025.vercel.app/icon.png",
+    "iconUrl": "https://mbc-2025.vercel.app/web/public/bank-svgrepo-com.svg",
     "splashImageUrl": "https://mbc-2025.vercel.app/splash.png",
     "splashBackgroundColor": "#0f172a",
     "description": "Emergency aid distribution for universities",

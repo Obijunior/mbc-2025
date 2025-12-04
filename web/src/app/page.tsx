@@ -188,96 +188,108 @@ export default function Home() {
             {/* For Donors */}
             <div className="group/section relative">
               <div className="absolute inset-0 bg-linear-to-br from-sky-500/10 to-transparent rounded-3xl blur-2xl opacity-0 group-hover/section:opacity-100 transition-all duration-700" />
-              <div className="relative h-full rounded-3xl border border-slate-800/50 bg-slate-900/60 backdrop-blur-sm p-8 hover:border-sky-500/40 hover:bg-slate-900/80 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-sky-500/20">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="p-3 rounded-2xl bg-sky-500/10 border border-sky-500/20 group-hover/section:bg-sky-500/20 group-hover/section:border-sky-500/40 transition-all duration-300 group-hover/section:scale-110">
-                    <svg className="w-7 h-7 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
+              <div className="relative h-full rounded-3xl border border-slate-800/50 bg-slate-900/60 backdrop-blur-sm p-8 hover:border-sky-500/40 hover:bg-slate-900/80 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-sky-500/20 flex flex-col">
+                <div className="flex flex-col flex-1">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="p-3 rounded-2xl bg-sky-500/10 border border-sky-500/20 group-hover/section:bg-sky-500/20 group-hover/section:border-sky-500/40 transition-all duration-300 group-hover/section:scale-110">
+                      <svg className="w-7 h-7 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <span className="text-xs font-bold text-sky-400 uppercase tracking-[0.2em]">For Donors</span>
+                    </div>
                   </div>
-                  <div>
-                    <span className="text-xs font-bold text-sky-400 uppercase tracking-[0.2em]">For Donors</span>
-                  </div>
+
+                  <h3 className="text-3xl font-black text-white group-hover/section:text-sky-50 transition-colors duration-300">
+                    Support students when it matters most
+                  </h3>
+                  <br></br>
+                  <div className="flex-1" />
+
+                  <p className="text-slate-300 leading-relaxed text-base font-light">
+                    Fund transparent emergency pools with USDC on Base. Every donation is tracked onchain, every disbursement is visible, and every dollar goes directly to students in crisis.
+                  </p>
                 </div>
 
-                <h3 className="text-3xl font-black text-white mb-4 group-hover/section:text-sky-50 transition-colors duration-300">
-                  Support students when it matters most
-                </h3>
+                <div className="mt-auto pt-8">
+                  <ul className="space-y-3 mb-8">
+                    {['100% transparent onchain tracking', 'Direct wallet-to-wallet transfers', 'See real impact metrics'].map((item, idx) => (
+                      <li key={item} className="flex items-center gap-3 text-sm text-slate-300 group-hover/section:text-slate-200 transition-all duration-300" style={{ transitionDelay: `${idx * 50}ms` }}>
+                        <div className="p-1 rounded-lg bg-sky-500/10 group-hover/section:bg-sky-500/20 transition-all duration-300">
+                          <svg className="w-4 h-4 text-sky-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                          </svg>
+                        </div>
+                        <span className="font-medium">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
 
-                <p className="text-slate-300 leading-relaxed mb-6 text-base font-light">
-                  Fund transparent emergency pools with USDC on Base. Every donation is tracked onchain, every disbursement is visible, and every dollar goes directly to students in crisis.
-                </p>
-
-                <ul className="space-y-3 mb-8">
-                  {['100% transparent onchain tracking', 'Direct wallet-to-wallet transfers', 'See real impact metrics'].map((item, idx) => (
-                    <li key={item} className="flex items-center gap-3 text-sm text-slate-300 group-hover/section:text-slate-200 transition-all duration-300" style={{ transitionDelay: `${idx * 50}ms` }}>
-                      <div className="p-1 rounded-lg bg-sky-500/10 group-hover/section:bg-sky-500/20 transition-all duration-300">
-                        <svg className="w-4 h-4 text-sky-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                        </svg>
-                      </div>
-                      <span className="font-medium">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <Link
-                  href="/donor"
-                  className="group/btn inline-flex items-center justify-center w-full gap-2 rounded-xl bg-linear-to-r from-sky-500 to-sky-600 px-6 py-4 font-bold text-white shadow-lg shadow-sky-900/50 hover:shadow-sky-900/80 hover:scale-[1.05] transition-all duration-300 hover:from-sky-400 hover:to-sky-500"
-                >
-                  Start Donating
-                  <svg className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </Link>
+                  <Link
+                    href="/donor"
+                    className="group/btn inline-flex items-center justify-center w-full gap-2 rounded-xl bg-linear-to-r from-sky-500 to-sky-600 px-6 py-4 font-bold text-white shadow-lg shadow-sky-900/50 hover:shadow-sky-900/80 hover:scale-[1.05] transition-all duration-300 hover:from-sky-400 hover:to-sky-500"
+                  >
+                    Start Donating
+                    <svg className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </Link>
+                </div>
               </div>
             </div>
 
             {/* For Students */}
             <div className="group/section relative">
               <div className="absolute inset-0 bg-linear-to-br from-red-500/10 to-transparent rounded-3xl blur-2xl opacity-0 group-hover/section:opacity-100 transition-all duration-700" />
-              <div className="relative h-full rounded-3xl border border-slate-800/50 bg-slate-900/60 backdrop-blur-sm p-8 hover:border-red-500/40 hover:bg-slate-900/80 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-red-500/20">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="p-3 rounded-2xl bg-red-500/10 border border-red-500/20 group-hover/section:bg-red-500/20 group-hover/section:border-red-500/40 transition-all duration-300 group-hover/section:scale-110">
-                    <svg className="w-7 h-7 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                    </svg>
+              <div className="relative h-full rounded-3xl border border-slate-800/50 bg-slate-900/60 backdrop-blur-sm p-8 hover:border-red-500/40 hover:bg-slate-900/80 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-red-500/20 flex flex-col">
+                <div className="flex flex-col flex-1">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="p-3 rounded-2xl bg-red-500/10 border border-red-500/20 group-hover/section:bg-red-500/20 group-hover/section:border-red-500/40 transition-all duration-300 group-hover/section:scale-110">
+                      <svg className="w-7 h-7 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <span className="text-xs font-bold text-red-400 uppercase tracking-[0.2em]">For Students</span>
+                    </div>
                   </div>
-                  <div>
-                    <span className="text-xs font-bold text-red-400 uppercase tracking-[0.2em]">For Students</span>
-                  </div>
+
+                  <h3 className="text-3xl font-black text-white group-hover/section:text-red-50 transition-colors duration-300">
+                    Get help in hours, not weeks
+                  </h3>
+
+                  <div className="flex-1" />
+
+                  <p className="text-slate-300 leading-relaxed text-base font-light">
+                    Verified students can request emergency funds directly to their wallet. No paperwork, no waiting rooms—just fast, transparent relief when life throws a curveball.
+                  </p>
                 </div>
 
-                <h3 className="text-3xl font-black text-white mb-4 group-hover/section:text-red-50 transition-colors duration-300">
-                  Get help in hours, not weeks
-                </h3>
+                <div className="mt-auto pt-8">
+                  <ul className="space-y-3 mb-8">
+                    {['Instant payout to your wallet', 'Up to $250 in emergency aid', 'Simple verification process'].map((item, idx) => (
+                      <li key={item} className="flex items-center gap-3 text-sm text-slate-300 group-hover/section:text-slate-200 transition-all duration-300" style={{ transitionDelay: `${idx * 50}ms` }}>
+                        <div className="p-1 rounded-lg bg-red-500/10 group-hover/section:bg-red-500/20 transition-all duration-300">
+                          <svg className="w-4 h-4 text-red-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                          </svg>
+                        </div>
+                        <span className="font-medium">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
 
-                <p className="text-slate-300 leading-relaxed mb-6 text-base font-light">
-                  Verified students can request emergency funds directly to their wallet. No paperwork, no waiting rooms—just fast, transparent relief when life throws a curveball.
-                </p>
-
-                <ul className="space-y-3 mb-8">
-                  {['Instant payout to your wallet', 'Up to $250 in emergency aid', 'Simple verification process'].map((item, idx) => (
-                    <li key={item} className="flex items-center gap-3 text-sm text-slate-300 group-hover/section:text-slate-200 transition-all duration-300" style={{ transitionDelay: `${idx * 50}ms` }}>
-                      <div className="p-1 rounded-lg bg-red-500/10 group-hover/section:bg-red-500/20 transition-all duration-300">
-                        <svg className="w-4 h-4 text-red-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                        </svg>
-                      </div>
-                      <span className="font-medium">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <Link
-                  href="/student"
-                  className="group/btn inline-flex items-center justify-center w-full gap-2 rounded-xl bg-linear-to-r from-red-500 to-red-600 px-6 py-4 font-bold text-white shadow-lg shadow-red-900/50 hover:shadow-red-900/80 hover:scale-[1.05] transition-all duration-300 hover:from-red-400 hover:to-red-500"
-                >
-                  Request Aid
-                  <svg className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </Link>
+                  <Link
+                    href="/student"
+                    className="group/btn inline-flex items-center justify-center w-full gap-2 rounded-xl bg-linear-to-r from-red-500 to-red-600 px-6 py-4 font-bold text-white shadow-lg shadow-red-900/50 hover:shadow-red-900/80 hover:scale-[1.05] transition-all duration-300 hover:from-red-400 hover:to-red-500"
+                  >
+                    Request Aid
+                    <svg className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
