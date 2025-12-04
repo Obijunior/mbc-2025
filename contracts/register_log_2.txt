@@ -1,0 +1,15 @@
+WARNING: You are currently using Node.js v25.2.0, which is not supported by Hardhat. This can lead to unexpected behavior. See https://v2.hardhat.org/nodejs-versions
+
+
+[dotenv@17.2.3] injecting env (4) from .env -- tip: ΓÜÖ∩╕Å  specify custom .env file path with { path: '/custom/path/.env' }
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ≡ƒöÉ prevent building .env in docker: https://dotenvx.com/prebuild
+Registering University of Kansas...
+University registered successfully!
+Transaction hash: 0xefce8a2131a89f3d6e326f2d56f6afa70f846c7bbe139e0140754f3b75e1a366
+Total universities: 1
+
+University 1:
+  Name: University of Kansas
+  Admin: 0x8A1F6D92E72c9110Dc9B1677782265B539206Dc3
+  Balance: 0
+  Active: true

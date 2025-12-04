@@ -100,15 +100,30 @@ export function useGetPendingRequests(universityId: bigint) {
 export function useGetStudentRequests() {
   const { address } = useAccount();
   
-  return useReadContract({
+  const result = useReadContract({
     address: CAMPUS_SHIELD_ADDRESS,
     abi: CAMPUS_SHIELD_ABI,
     functionName: 'getStudentRequests',
     args: address ? [address] : undefined,
     query: {
       enabled: !!address,
+      gcTime: 0,
+      staleTime: 0,
+      refetchOnMount: true,
+      refetchOnWindowFocus: true,
+      retry: false,
     },
   });
+
+  // Contract returns "0x" for empty arrays which wagmi treats as an error
+  const hasEmptyDataError = result.error?.message?.includes('returned no data ("0x")');
+  
+  return {
+    ...result,
+    data: hasEmptyDataError ? [] : (result.data ?? []),
+    isError: hasEmptyDataError ? false : result.isError,
+    error: hasEmptyDataError ? null : result.error,
+  };
 }
 
 export function useGetUniversityRequests(universityId: bigint) {

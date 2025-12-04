@@ -1,4 +1,4 @@
-import { cookieStorage, createStorage, noopStorage } from '@wagmi/core'
+import { cookieStorage, createStorage } from '@wagmi/core'
 import { WagmiAdapter } from '@reown/appkit-adapter-wagmi'
 import { baseSepolia } from '@reown/appkit/networks'
 
@@ -15,7 +15,7 @@ export const networks = [baseSepolia]
 // Set up the Wagmi Adapter (Config)
 export const wagmiAdapter = new WagmiAdapter({
   storage: createStorage({
-    storage: typeof window !== 'undefined' ? cookieStorage : noopStorage,
+    storage: cookieStorage,
   }),
   ssr: true,
   projectId,

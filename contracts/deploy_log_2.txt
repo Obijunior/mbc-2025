@@ -1,0 +1,28 @@
+WARNING: You are currently using Node.js v25.2.0, which is not supported by Hardhat. This can lead to unexpected behavior. See https://v2.hardhat.org/nodejs-versions
+
+
+[dotenv@17.2.3] injecting env (4) from .env -- tip: ≡ƒ¢á∩╕Å  run anywhere with `dotenvx run -- yourcommand`
+[?25l[2K[1G[36m?[39m [1mConfirm deploy to network baseSepolia (84532)?[22m [90m┬╗[39m [90m(y/N)[39m[2K[1G[2K[1G[32mΓêÜ[39m [1mConfirm deploy to network baseSepolia (84532)?[22m [90m...[39m yes
+[?25hHardhat Ignition starting for [ CampusShieldModule ]...[2K[1GHardhat Ignition ≡ƒÜÇ
+
+Resuming existing deployment from .\ignition\deployments\chain-84532
+
+Deploying [ CampusShieldModule ]
+
+Batch #1
+  Executing CampusShieldModule#CampusShield...
+
+[3A[0JBatch #1
+  Executing CampusShieldModule#CampusShield...
+
+[3A[0JBatch #1
+  Executed CampusShieldModule#CampusShield
+
+[3A[0JBatch #1
+  Executed CampusShieldModule#CampusShield
+
+[ CampusShieldModule ] successfully deployed ≡ƒÜÇ
+
+Deployed Addresses
+
+CampusShieldModule#CampusShield - 0x874EF5d547CF952D6903458099547Ee085D7182d

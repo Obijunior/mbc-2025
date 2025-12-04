@@ -1,0 +1,4 @@
+[dotenv@17.2.3] injecting env (4) from .env -- tip: ΓÜÖ∩╕Å  specify custom .env file path with { path: '/custom/path/.env' }
+Checking env vars...
+PRIVATE_KEY is set (length: 66)
+BASE_SEPOLIA_RPC_URL is set: https://sepolia.base.org

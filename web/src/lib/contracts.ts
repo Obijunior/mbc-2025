@@ -16,12 +16,10 @@ export const CAMPUS_SHIELD_ADDRESSES = {
   base: baseAddress,
 } as const;
 
-// Current network (Base Sepolia for testnet)
 export const CURRENT_NETWORK = 'baseSepolia' as const;
 export const USDC_ADDRESS = USDC_ADDRESSES[CURRENT_NETWORK];
 export const CAMPUS_SHIELD_ADDRESS = CAMPUS_SHIELD_ADDRESSES[CURRENT_NETWORK];
 
-// USDC has 6 decimals
 export const USDC_DECIMALS = 6;
 
 // Helper function to convert human-readable amount to USDC units (6 decimals)

@@ -1,7 +1,7 @@
 // web/app/student/page.tsx
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useAccount } from "wagmi";
 import {
   useGetStudentRequests,
@@ -13,8 +13,8 @@ import { formatUSDC, parseUSDC, type AidRequest } from "@/lib/contracts";
 
 // Demo universities - in production, these would be fetched from the contract
 const UNIVERSITIES = [
-  { id: 1n, name: "University of Kansas" },
-  { id: 2n, name: "Kansas State University" },
+  { id: 1, name: "University of Kansas" },
+  { id: 2, name: "Kansas State University" },
 ];
 
 export default function StudentPage() {
@@ -23,32 +23,58 @@ export default function StudentPage() {
   const [amount, setAmount] = useState("");
   const [reason, setReason] = useState("");
   const [txStatus, setTxStatus] = useState<'idle' | 'pending' | 'success' | 'error'>('idle');
+  const [shouldPoll, setShouldPoll] = useState(false);
 
   // Contract hooks
   const { data: studentRequests, refetch: refetchRequests } = useGetStudentRequests();
-  const { data: universityData } = useGetUniversity(selectedUniversity);
+  const { data: universityData, refetch: refetchUniversity, error: universityError } = useGetUniversity(selectedUniversity);
   const { data: usdcBalance } = useUSDCBalance();
 
   const {
     requestAid,
     isPending,
+    isConfirming,
     isSuccess,
     error,
   } = useRequestAid();
 
   // Handle transaction status
   useEffect(() => {
-    if (isPending) setTxStatus('pending');
-  }, [isPending]);
+    if (isPending || isConfirming) setTxStatus('pending');
+  }, [isPending, isConfirming]);
 
+  // Start polling after successful transaction
   useEffect(() => {
-    if (isSuccess) {
+    if (isSuccess && !shouldPoll) {
       setTxStatus('success');
-      refetchRequests();
       setAmount("");
       setReason("");
+      setShouldPoll(true);
     }
-  }, [isSuccess, refetchRequests]);
+  }, [isSuccess, shouldPoll]);
+
+  // Poll for updates after transaction
+  useEffect(() => {
+    if (shouldPoll) {
+      let pollCount = 0;
+      const maxPolls = 10;
+      
+      const pollInterval = setInterval(async () => {
+        pollCount++;
+        await refetchRequests();
+        refetchUniversity();
+        
+        if (pollCount >= maxPolls) {
+          clearInterval(pollInterval);
+          setShouldPoll(false);
+        }
+      }, 1000);
+      
+      return () => {
+        clearInterval(pollInterval);
+      };
+    }
+  }, [shouldPoll, refetchRequests, refetchUniversity]);
 
   useEffect(() => {
     if (error) setTxStatus('error');
@@ -62,14 +88,26 @@ export default function StudentPage() {
 
   const resetForm = () => {
     setTxStatus('idle');
+    setShouldPoll(false);
     setAmount("");
     setReason("");
   };
 
   // Calculate stats from student requests
-  const pendingRequests = (studentRequests as AidRequest[] | undefined)?.filter(r => !r.isProcessed) || [];
-  const approvedRequests = (studentRequests as AidRequest[] | undefined)?.filter(r => r.isApproved) || [];
-  const totalReceived = approvedRequests.reduce((sum, r) => sum + r.amount, 0n);
+  const pendingRequests = useMemo(() => 
+    (studentRequests as AidRequest[] | undefined)?.filter(r => !r.isProcessed) || [],
+    [studentRequests]
+  );
+  const approvedRequests = useMemo(() => 
+    (studentRequests as AidRequest[] | undefined)?.filter(r => r.isApproved) || [],
+    [studentRequests]
+  );
+  const totalReceived = useMemo(() => 
+    approvedRequests.reduce((sum, r) => sum + r.amount, 0n),
+    [approvedRequests]
+  );
+
+
 
   const universityBalance = universityData ? universityData[2] : 0n;
 
@@ -90,6 +128,15 @@ export default function StudentPage() {
         <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-4">
           <p className="text-sm text-amber-200">
             Please connect your wallet to request emergency aid.
+          </p>
+        </div>
+      ) : universityError ? (
+        <div className="rounded-xl border border-red-500/30 bg-red-500/10 p-4">
+          <p className="text-sm font-medium text-red-200">
+            ⚠️ No universities registered yet
+          </p>
+          <p className="text-xs text-red-300 mt-1">
+            A university administrator needs to register their institution first before students can request aid.
           </p>
         </div>
       ) : (
@@ -221,17 +268,19 @@ export default function StudentPage() {
                   <div className="rounded-xl border border-sky-500/30 bg-sky-500/10 p-3">
                     <div className="flex items-center gap-2">
                       <div className="h-4 w-4 animate-spin rounded-full border-2 border-sky-400 border-t-transparent" />
-                      <p className="text-sm text-sky-200">Submitting request...</p>
+                      <p className="text-sm text-sky-200">
+                        {isPending ? 'Submitting request...' : isConfirming ? 'Confirming transaction...' : 'Processing...'}
+                      </p>
                     </div>
                   </div>
                 )}
 
                 <button
                   onClick={handleRequestAid}
-                  disabled={!amount || !reason || isPending}
+                  disabled={!amount || !reason || isPending || isConfirming}
                   className="mt-2 inline-flex w-full items-center justify-center rounded-xl bg-emerald-500 px-3 py-2 text-sm font-medium text-slate-950 transition hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-60"
                 >
-                  {isPending ? 'Submitting...' : 'Submit Request'}
+                  {isPending ? 'Submitting...' : isConfirming ? 'Confirming...' : 'Submit Request'}
                 </button>
               </>
             )}
