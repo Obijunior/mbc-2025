@@ -25,11 +25,11 @@ export default function Home() {
       setIsVisible(true);
       setIsMounted(true);
     }, 100);
-    
+
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
-    
+
     window.addEventListener('mousemove', handleMouseMove);
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
@@ -42,7 +42,7 @@ export default function Home() {
       {/* Animated background elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         {isMounted && (
-          <div 
+          <div
             className="absolute w-[500px] h-[500px] bg-sky-500/20 rounded-full blur-[120px] transition-all duration-1000 ease-out"
             style={{
               left: `${mousePosition.x - 250}px`,
@@ -98,7 +98,7 @@ export default function Home() {
           <div className="relative max-w-5xl mx-auto group">
             {/* Animated glow effect */}
             <div className="absolute inset-0 bg-linear-to-r from-sky-500/20 via-purple-500/20 to-red-500/20 blur-3xl -z-10 opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
-            
+
             <div className="rounded-3xl border border-slate-800/50 bg-slate-900/60 backdrop-blur-xl p-8 sm:p-12 shadow-2xl hover:border-slate-700/50 transition-all duration-500">
               {/* Header */}
               <div className="flex items-center justify-between mb-8">
