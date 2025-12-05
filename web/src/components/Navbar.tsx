@@ -4,22 +4,21 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
+import { SidebarMenu } from "./SidebarMenu";
+import { DashboardSwitcher } from "./DashboardSwitcher";
 
 const links = [
   { href: "/", label: "Home" },
-  { href: "/donor", label: "Donor" },
-  { href: "/student", label: "Student" },
-  { href: "/admin", label: "Admin" },
 ];
 
 export function Navbar() {
   const pathname = usePathname();
 
   return (
-    <header className="relative border-b border-slate-800/50 bg-slate-950/80 backdrop-blur-xl">
+    <header className="relative z-50 border-b border-slate-800/50 bg-slate-950/80 backdrop-blur-xl">
       {/* Subtle gradient glow */}
       <div className="absolute inset-0 bg-linear-to-r from-sky-500/5 via-transparent to-red-500/5 pointer-events-none" />
-      
+
       <div className="relative mx-auto flex max-w-7xl items-center justify-between px-6 py-4 sm:px-8 lg:px-12">
         {/* Logo */}
         <Link href="/" className="group flex items-center gap-3">
@@ -54,25 +53,22 @@ export function Navbar() {
                   {isActive && (
                     <span className="absolute inset-0 rounded-xl bg-linear-to-r from-sky-500/20 to-red-500/20 border border-sky-500/30" />
                   )}
-                  
+
                   {/* Hover background */}
                   {!isActive && (
                     <span className="absolute inset-0 rounded-xl bg-slate-800/0 group-hover:bg-slate-800/50 border border-transparent group-hover:border-slate-700/50 transition-all duration-300" />
                   )}
-                  
+
                   {/* Text */}
                   <span className="relative">{link.label}</span>
-                  
-                  {/* Active indicator dot */}
-                  {isActive && (
-                    <span className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 flex h-1 w-1">
-                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75" />
-                      <span className="relative inline-flex h-1 w-1 rounded-full bg-sky-400" />
-                    </span>
-                  )}
                 </Link>
               );
             })}
+
+            {/* Dashboard Switcher */}
+            <div className="ml-2 pl-2 border-l border-slate-800">
+              <DashboardSwitcher />
+            </div>
           </div>
 
           {/* Wallet Button */}
@@ -80,6 +76,9 @@ export function Navbar() {
             <div className="absolute inset-0 bg-linear-to-r from-sky-500/20 to-red-500/20 blur-xl opacity-0 hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
             <appkit-button />
           </div>
+
+          {/* Mobile Menu */}
+          <SidebarMenu />
         </nav>
       </div>
     </header>
