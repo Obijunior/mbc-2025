@@ -8,20 +8,20 @@ CampusShield transforms university emergency aid into a transparent, instant, bl
 ![USDC](https://img.shields.io/badge/Powered%20by-USDC-2775CA?style=flat-square)
 ![Farcaster](https://img.shields.io/badge/MiniApp-Farcaster-8A63D2?style=flat-square)
 
-## 🎯 Hackathon Tracks
+## Hackathon Tracks
 
-### Base Track ✅
+### Base Track 
 - **Network**: Deployed on Base Sepolia (Testnet)
 - **Smart Contract**: Full EVM-compatible Solidity contract
 - **MiniKit Integration**: Farcaster MiniApp SDK for social distribution
 - **Wallet Connect**: Reown AppKit for seamless wallet connections
 
-### Circle Bounty ✅
+### Circle Bounty 
 - **USDC Integration**: All donations and disbursements in USDC
 - **On-chain Payments**: Direct wallet-to-wallet USDC transfers
 - **Transparent Treasury**: Real-time fund tracking on Base
 
-## 🏗️ Architecture
+##  Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -105,24 +105,24 @@ Open [http://localhost:3000](http://localhost:3000)
 ## 📋 Features
 
 ### For Universities (Admins)
-- ✅ Register university emergency fund
-- ✅ View pending aid requests
-- ✅ Approve or reject requests
-- ✅ Track fund balance and donor count
+-  Register university emergency fund
+-  View pending aid requests
+-  Approve or reject requests
+-  Track fund balance and donor count
 
 ### For Donors
-- ✅ Browse university funds
-- ✅ Donate USDC directly to funds
-- ✅ One-click approve + donate flow
-- ✅ View fund health and impact
+-  Browse university funds
+-  Donate USDC directly to funds
+-  One-click approve + donate flow
+-  View fund health and impact
 
 ### For Students
-- ✅ Request emergency aid (up to $250)
-- ✅ Provide reason for request
-- ✅ Track request status
-- ✅ Receive USDC directly to wallet
+-  Request emergency aid (up to $250)
+-  Provide reason for request
+-  Track request status
+-  Receive USDC directly to wallet
 
-## 🔧 Smart Contract
+##  Smart Contract
 
 ### Key Functions
 
@@ -141,14 +141,14 @@ Open [http://localhost:3000](http://localhost:3000)
 | Base Sepolia | `0x036CbD53842c5426634e7929541eC2318f3dCF7e` | *Deploy yours* |
 | Base Mainnet | `0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913` | *Coming soon* |
 
-## 🧪 Testing
+##  Testing
 
 ```bash
 cd contracts
 npm test
 ```
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 mbc-2025/
@@ -167,7 +167,7 @@ mbc-2025/
     └── public/               # Static assets
 ```
 
-## 🎨 Tech Stack
+##  Tech Stack
 
 - **Frontend**: Next.js 16, React 19, TailwindCSS
 - **Wallet**: Reown AppKit, wagmi, viem
@@ -175,7 +175,7 @@ mbc-2025/
 - **Social**: Farcaster MiniApp SDK
 - **Payments**: Circle USDC (ERC20)
 
-## 🔒 Security
+##  Security
 
 - ReentrancyGuard on all state-changing functions
 - SafeERC20 for token transfers
