@@ -1,8 +1,8 @@
-# [CampusShield](https://mbc-2025.vercel.app/)
+# [Campus Shield](https://mbc-2025.vercel.app/)
 
 > **Onchain emergency fund for university students, powered by USDC on Base**
 
-CampusShield transforms university emergency aid into a transparent, instant, blockchain-powered safety net for students in crisis. Built for Midwest Blockchain Conference 2025
+Campus Shield transforms university emergency aid into a transparent, instant, blockchain-powered safety net for students in crisis. Built for Midwest Blockchain Conference 2025
 
 ![Base](https://img.shields.io/badge/Built%20on-Base-0052FF?style=flat-square&logo=coinbase)
 ![USDC](https://img.shields.io/badge/Powered%20by-USDC-2775CA?style=flat-square)
@@ -25,7 +25,7 @@ CampusShield transforms university emergency aid into a transparent, instant, bl
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                        CampusShield                              │
+│                        Campus Shield                              │
 ├─────────────────────────────────────────────────────────────────┤
 │  Frontend (Next.js + React)                                      │
 │  ├── Wallet Connection (Reown AppKit)                           │
@@ -136,7 +136,7 @@ Open [http://localhost:3000](http://localhost:3000)
 
 ### Contract Addresses
 
-| Network | USDC | CampusShield |
+| Network | USDC | Campus Shield |
 |---------|------|--------------|
 | Base Sepolia | `0x036CbD53842c5426634e7929541eC2318f3dCF7e` | *Deploy yours* |
 | Base Mainnet | `0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913` | *Coming soon* |
