@@ -71,7 +71,6 @@ npm install
 ```env
 BASE_SEPOLIA_RPC_URL=https://sepolia.base.org
 PRIVATE_KEY=your_private_key_without_0x
-BASESCAN_API_KEY=optional_for_verification
 ```
 
 **Web (`web/.env.local`):**
@@ -189,4 +188,4 @@ MIT
 
 ---
 
-Built with ❤️ for the hackathon | [Base](https://base.org) | [Circle](https://circle.com)
+Built with ❤️ for MBC 2025 by Henry and Jahnvi | [Base](https://base.org) | [Circle](https://circle.com)
