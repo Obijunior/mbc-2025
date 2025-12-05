@@ -1,4 +1,0 @@
-[dotenv@17.2.3] injecting env (0) from .env -- tip: ≡ƒ¢á∩╕Å  run anywhere with `dotenvx run -- yourcommand`
-Checking env vars...
-PRIVATE_KEY is NOT set
-BASE_SEPOLIA_RPC_URL is NOT set
