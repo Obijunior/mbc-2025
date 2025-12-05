@@ -1,4 +1,4 @@
-# CampusShield
+# [CampusShield](https://mbc-2025.vercel.app/)
 
 > **Onchain emergency fund for university students, powered by USDC on Base**
 
