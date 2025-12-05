@@ -8,6 +8,13 @@ import MiniAppInit from "@/components/MiniAppInit";
 export const metadata: Metadata = {
   title: "CampusShield",
   description: "Onchain emergency fund for universities on Base",
+  appleWebApp: {
+    title: "CampusShield",
+    statusBarStyle: "black-translucent",
+    startupImage: [
+      "/apple-icon.png",
+    ],
+  },
   other: {
     "fc:miniapp": JSON.stringify({
       version: "next",
