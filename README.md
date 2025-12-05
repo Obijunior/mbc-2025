@@ -1,27 +1,27 @@
-# CampusShield 🛡️
+# CampusShield
 
 > **Onchain emergency fund for university students, powered by USDC on Base**
 
-CampusShield transforms university emergency aid into a transparent, instant, blockchain-powered safety net for students in crisis. Built for the Base Track and Circle Bounty at the hackathon.
+CampusShield transforms university emergency aid into a transparent, instant, blockchain-powered safety net for students in crisis. Built for Midwest Blockchain Conference 2025
 
 ![Base](https://img.shields.io/badge/Built%20on-Base-0052FF?style=flat-square&logo=coinbase)
 ![USDC](https://img.shields.io/badge/Powered%20by-USDC-2775CA?style=flat-square)
 ![Farcaster](https://img.shields.io/badge/MiniApp-Farcaster-8A63D2?style=flat-square)
 
-## 🎯 Hackathon Tracks
+## Hackathon Tracks
 
-### Base Track ✅
+### Base Track 
 - **Network**: Deployed on Base Sepolia (Testnet)
 - **Smart Contract**: Full EVM-compatible Solidity contract
 - **MiniKit Integration**: Farcaster MiniApp SDK for social distribution
 - **Wallet Connect**: Reown AppKit for seamless wallet connections
 
-### Circle Bounty ✅
+### Circle Bounty 
 - **USDC Integration**: All donations and disbursements in USDC
 - **On-chain Payments**: Direct wallet-to-wallet USDC transfers
 - **Transparent Treasury**: Real-time fund tracking on Base
 
-## 🏗️ Architecture
+##  Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -43,7 +43,7 @@ CampusShield transforms university emergency aid into a transparent, instant, bl
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Prerequisites
 - Node.js 18+
@@ -53,7 +53,7 @@ CampusShield transforms university emergency aid into a transparent, instant, bl
 ### 1. Clone and Install
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/Obijunior/mbc-2025
 cd mbc-2025
 
 # Install contract dependencies
@@ -71,7 +71,6 @@ npm install
 ```env
 BASE_SEPOLIA_RPC_URL=https://sepolia.base.org
 PRIVATE_KEY=your_private_key_without_0x
-BASESCAN_API_KEY=optional_for_verification
 ```
 
 **Web (`web/.env.local`):**
@@ -103,27 +102,27 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000)
 
-## 📋 Features
+##  Features
 
 ### For Universities (Admins)
-- ✅ Register university emergency fund
-- ✅ View pending aid requests
-- ✅ Approve or reject requests
-- ✅ Track fund balance and donor count
+-  Register university emergency fund
+-  View pending aid requests
+-  Approve or reject requests
+-  Track fund balance and donor count
 
 ### For Donors
-- ✅ Browse university funds
-- ✅ Donate USDC directly to funds
-- ✅ One-click approve + donate flow
-- ✅ View fund health and impact
+-  Browse university funds
+-  Donate USDC directly to funds
+-  One-click approve + donate flow
+-  View fund health and impact
 
 ### For Students
-- ✅ Request emergency aid (up to $250)
-- ✅ Provide reason for request
-- ✅ Track request status
-- ✅ Receive USDC directly to wallet
+-  Request emergency aid (up to $250)
+-  Provide reason for request
+-  Track request status
+-  Receive USDC directly to wallet
 
-## 🔧 Smart Contract
+##  Smart Contract
 
 ### Key Functions
 
@@ -142,14 +141,14 @@ Open [http://localhost:3000](http://localhost:3000)
 | Base Sepolia | `0x036CbD53842c5426634e7929541eC2318f3dCF7e` | *Deploy yours* |
 | Base Mainnet | `0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913` | *Coming soon* |
 
-## 🧪 Testing
+##  Testing
 
 ```bash
 cd contracts
 npm test
 ```
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 mbc-2025/
@@ -168,7 +167,7 @@ mbc-2025/
     └── public/               # Static assets
 ```
 
-## 🎨 Tech Stack
+##  Tech Stack
 
 - **Frontend**: Next.js 16, React 19, TailwindCSS
 - **Wallet**: Reown AppKit, wagmi, viem
@@ -176,17 +175,17 @@ mbc-2025/
 - **Social**: Farcaster MiniApp SDK
 - **Payments**: Circle USDC (ERC20)
 
-## 🔒 Security
+##  Security
 
 - ReentrancyGuard on all state-changing functions
 - SafeERC20 for token transfers
 - Admin-only access for aid approval
 - Input validation on all parameters
 
-## 📄 License
+##  License
 
 MIT
 
 ---
 
-Built with ❤️ for the hackathon | [Base](https://base.org) | [Circle](https://circle.com)
+Built with <3 for MBC 2025 by Henry and Jahnvi | [Base](https://base.org) | [Circle](https://circle.com)
