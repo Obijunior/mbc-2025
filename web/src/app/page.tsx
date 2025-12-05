@@ -81,7 +81,7 @@ export default function Home() {
             {/* Main Heading with better typography */}
             <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tight leading-[1.1]">
               <span className="block text-white mb-2 drop-shadow-2xl">Emergency funds,</span>
-              <span className="block bg-linear-to-r from-sky-400 via-sky-300 to-red-400 bg-clip-text text-transparent animate-gradient drop-shadow-2xl">
+              <span className="block bg-linear-to-r from-sky-600 via-sky-200 to-blue-400 bg-clip-text text-transparent animate-gradient drop-shadow-2xl">
                 reimagined onchain
               </span>
             </h1>
