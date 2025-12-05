@@ -106,7 +106,7 @@ export function SidebarMenu() {
                     {/* Footer */}
                     <div className="p-4 border-t border-slate-800">
                         <div className="text-xs text-slate-500 text-center">
-                            CampusShield © 2025
+                            Campus Shield © 2025
                         </div>
                     </div>
                 </div>

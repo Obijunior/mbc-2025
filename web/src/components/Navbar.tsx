@@ -28,7 +28,7 @@ export function Navbar() {
             </span>
           </div>
           <span className="text-lg font-black tracking-tight text-white group-hover:text-sky-100 transition-colors">
-            CampusShield
+            Campus Shield
           </span>
         </Link>
 
