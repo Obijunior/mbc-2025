@@ -1,8 +1,8 @@
-# CampusShield 🛡️
+# CampusShield
 
 > **Onchain emergency fund for university students, powered by USDC on Base**
 
-CampusShield transforms university emergency aid into a transparent, instant, blockchain-powered safety net for students in crisis. Built for the Base Track and Circle Bounty at the hackathon.
+CampusShield transforms university emergency aid into a transparent, instant, blockchain-powered safety net for students in crisis. Built for Midwest Blockchain Conference 2025
 
 ![Base](https://img.shields.io/badge/Built%20on-Base-0052FF?style=flat-square&logo=coinbase)
 ![USDC](https://img.shields.io/badge/Powered%20by-USDC-2775CA?style=flat-square)
@@ -43,7 +43,7 @@ CampusShield transforms university emergency aid into a transparent, instant, bl
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Prerequisites
 - Node.js 18+
@@ -53,7 +53,7 @@ CampusShield transforms university emergency aid into a transparent, instant, bl
 ### 1. Clone and Install
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/Obijunior/mbc-2025
 cd mbc-2025
 
 # Install contract dependencies
@@ -102,7 +102,7 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000)
 
-## 📋 Features
+##  Features
 
 ### For Universities (Admins)
 -  Register university emergency fund
@@ -182,10 +182,10 @@ mbc-2025/
 - Admin-only access for aid approval
 - Input validation on all parameters
 
-## 📄 License
+##  License
 
 MIT
 
 ---
 
-Built with ❤️ for MBC 2025 by Henry and Jahnvi | [Base](https://base.org) | [Circle](https://circle.com)
+Built with <3 for MBC 2025 by Henry and Jahnvi | [Base](https://base.org) | [Circle](https://circle.com)
